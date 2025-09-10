@@ -80,13 +80,13 @@ const Header = () => {
             : 'backdrop-blur-2xl bg-white/10 py-6'
         }`}
       >
-        <div className="container mx-auto px-6 flex justify-between items-center">
+        <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl shadow-2xl shadow-cyan-500/40 hover:scale-110 transition-transform duration-300">
-              <Code className="w-6 h-6 text-white" />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="p-2 sm:p-3 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl shadow-2xl shadow-cyan-500/40 hover:scale-110 transition-transform duration-300">
+              <Code className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent">Jeenokanth</span>
+            <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent">Jeenokanth</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -129,7 +129,7 @@ const Header = () => {
             />
             
             {/* Mobile menu */}
-            <div className="fixed top-24 right-4 left-4 md:hidden z-50 animate-in slide-in-from-top-2 duration-300">
+            <div className="fixed top-20 right-4 left-4 md:hidden z-50 animate-in slide-in-from-top-2 duration-300">
               <div className="backdrop-blur-3xl bg-white/90 border border-white/50 rounded-2xl p-6 shadow-2xl shadow-cyan-500/20">
                 <ul className="flex flex-col gap-2">
                   {navItems.map((item) => (

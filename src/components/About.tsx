@@ -11,48 +11,63 @@ const About = () => {
         <div className="absolute top-1/2 left-1/4 w-48 h-48 bg-gradient-to-r from-pink-200/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-2000 opacity-30"></div>
       </div>
 
-      <section id="about" className="relative min-h-screen flex items-center justify-center px-6 py-20 z-10">
-        <div className="container mx-auto">
-          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-12 max-w-4xl mx-auto text-center shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent mb-8 animate-pulse">
-              About Me
-            </h2>
-            <p className="text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto">
-  I’m Jeenokanth, a final-year CS student passionate about 
-  Python, AI, and Problem-Solving. I enjoy creating projects with real-world impact.
-</p> <br />
+      <section id="about" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-slate-100 to-white">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12">
+    {/* Section Title */}
+    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-4 sm:mb-6">
+      About Me
+    </h2>
+    <p className="text-base sm:text-lg text-slate-700 leading-relaxed text-center max-w-3xl mx-auto px-4 sm:px-0">
+      I’m <b>Jeenokanth</b>, a final-year Computer Science student passionate about{" "}
+      <b>Python, AI, and Web Development</b>. Skilled in problem-solving, DSA, and backend frameworks, 
+      I enjoy building intelligent, data-driven solutions that create real-world impact.
+    </p>
 
-<h3 className="mt-6 text-xl font-semibold text-slate-900">🎓 Education</h3> <br />
-<p className="text-slate-700">
-  B.Tech CSE – Adhiyamaan College of Engineering (2022–2026) <br />
-  CGPA: <b>8.0</b> | HSC: <b>81%</b> | SSLC: <b>98.2%</b>
-</p>
+    {/* Education */}
+    <div className="mt-8 sm:mt-12">
+      <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-3 sm:mb-4">🎓 Education</h3>
+      <ul className="text-slate-800 text-sm sm:text-base space-y-2 px-4 sm:px-0">
+        <li>
+          <b>B.Tech in Computer Science & Engineering</b> – Adhiyamaan College of Engineering (2022 – 2026) <br />
+          Current CGPA: <b>8.0</b>
+        </li>
+        <li>HSC – <b>81%</b></li>
+        <li>SSLC – <b>98.2%</b></li>
+      </ul>
+    </div>
 
-            
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-              <div className="text-center backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl p-6 hover:bg-white/25 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105">
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent mb-2">20+</div>
-                <div className="text-sm text-slate-500 uppercase tracking-wide">Projects</div>
-              </div>
-              <div className="text-center backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl p-6 hover:bg-white/25 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105">
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent mb-2">100+</div>
-                <div className="text-sm text-slate-500 uppercase tracking-wide">Problems solved</div>
-              </div>
-              <div className="text-center backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl p-6 hover:bg-white/25 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105">
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent mb-2">3+</div>
-                <div className="text-sm text-slate-500 uppercase tracking-wide">Internships</div>
-              </div>
-              <div className="text-center backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl p-6 hover:bg-white/25 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105">
-                <div className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent mb-2">10+</div>
-                <div className="text-sm text-slate-500 uppercase tracking-wide">Certifications</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    {/* Stats Section */}
+    <div className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+      <div>
+        <div className="text-2xl sm:text-3xl font-bold text-blue-700">20+</div>
+        <div className="text-xs sm:text-sm text-slate-700 uppercase tracking-wide">Projects</div>
+      </div>
+
+      <div>
+        <div className="text-2xl sm:text-3xl font-bold text-green-700">200+</div>
+        <div className="text-xs sm:text-sm text-slate-700 uppercase tracking-wide">Problems Solved</div>
+      </div>
+
+      <div>
+        <div className="text-2xl sm:text-3xl font-bold text-purple-700">5+</div>
+        <div className="text-xs sm:text-sm text-slate-700 uppercase tracking-wide">Hackathons</div>
+      </div>
+
+      <div>
+        <div className="text-2xl sm:text-3xl font-bold text-orange-700">10+</div>
+        <div className="text-xs sm:text-sm text-slate-700 uppercase tracking-wide">Certifications</div>
+      </div>
+    </div>
+
+    {/* Soft Skills */}
+    <p className="mt-8 sm:mt-12 text-slate-800 text-center text-sm sm:text-base px-4 sm:px-0">
+      💡 <b>Strengths:</b> Problem-solving, adaptability, teamwork, and continuous learning.
+    </p>
+  </div>
+</section>
+
     </>
   );
 };
 
-export default About;    
+export default About;

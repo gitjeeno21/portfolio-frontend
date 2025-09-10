@@ -89,20 +89,20 @@ const Contact = () => {
         <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-pink-200/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-2000 opacity-30"></div>
       </div>
 
-      <section id="contact" className="relative min-h-screen flex items-center justify-center px-6 py-20 z-10">
+      <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
         <div className="container mx-auto">
-          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-12 animate-pulse">
+          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-8 sm:mb-12 animate-pulse">
               Get In Touch
             </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
               {/* Contact Information */}
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8">
                 <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-slate-700">
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-slate-700">
                     Let's work together
                   </h3>
-                  <p className="text-slate-600 leading-relaxed mb-8">
+                  <p className="text-slate-600 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
                     I'm always interested in new opportunities and interesting projects. 
                     Whether you have a question or just want to say hi, I'll try my best 
                     to get back to you!

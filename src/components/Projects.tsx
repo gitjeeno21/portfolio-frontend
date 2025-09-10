@@ -69,14 +69,14 @@ const Projects = () => {
         <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
       </div>
 
-      <section id="projects" className="relative min-h-screen flex items-center justify-center px-6 py-20 z-10">
+      <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
         <div className="container mx-auto">
-          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
-            <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-12 animate-pulse">
+          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-8 sm:mb-12 animate-pulse">
               Featured Projects
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {projects.map((project, index) => (
                 <div
                   key={index}
@@ -86,9 +86,9 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Project Header */}
-                  <div className={`h-48 bg-gradient-to-br ${project.gradient} relative flex items-center justify-center`}>
+                  <div className={`h-40 sm:h-48 bg-gradient-to-br ${project.gradient} relative flex items-center justify-center`}>
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                    <project.icon className="w-16 h-16 text-white z-10 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
+                    <project.icon className="w-12 h-12 sm:w-16 sm:h-16 text-white z-10 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
                     
                     {/* Project Actions - Show on Hover */}
                     <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
@@ -108,12 +108,12 @@ const Projects = () => {
                   </div>
                   
                   {/* Project Content */}
-                  <div className="p-6 relative z-10">
-                    <h3 className="text-xl font-semibold mb-3 text-slate-700 group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  <div className="p-4 sm:p-6 relative z-10">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-700 group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                       {project.title}
                     </h3>
                     
-                    <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                       {project.description}
                     </p>
                     
@@ -122,7 +122,7 @@ const Projects = () => {
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-3 py-1 text-xs backdrop-blur-xl bg-white/20 border border-white/40 rounded-full text-slate-600 group-hover:border-cyan-400/50 group-hover:bg-white/30 transition-all duration-300"
+                          className="px-2 sm:px-3 py-1 text-xs backdrop-blur-xl bg-white/20 border border-white/40 rounded-full text-slate-600 group-hover:border-cyan-400/50 group-hover:bg-white/30 transition-all duration-300"
                         >
                           {tag}
                         </span>

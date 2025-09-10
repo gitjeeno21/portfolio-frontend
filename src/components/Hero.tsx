@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Download, Mail, Github, Linkedin, Facebook, Instagram, Code, Brain, Sparkles, Zap } from 'lucide-react';
+import profileImg from '@/assets/profile.jpg';
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
@@ -109,7 +110,7 @@ const Hero = () => {
             <div className="flex-shrink-0 mb-10 lg:mb-0 flex justify-center lg:justify-end w-full lg:w-auto">
               <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl border-4 border-blue-200 bg-white flex items-center justify-center">
                 <img
-                  src="\src\assets\profile.jpg" // Place your image as 'public/profile.jpg'
+                  src={profileImg}
                   alt="Jeeno Profile"
                   className="w-full h-full object-cover"
                 />

@@ -16,97 +16,84 @@ const Skills = () => {
       icon: Code,
       title: 'Python Development',
       description: 'Advanced Python programming, Django, Flask, and automation',
-      color: 'from-yellow-400 to-yellow-600'
+      color: 'from-cyan-400 to-blue-500'
     },
     {
       icon: Brain,
       title: 'AI & Machine Learning',
-      description: 'Deep learning, neural networks, and data science',
-      color: 'from-purple-400 to-purple-600'
+      description: ' Libraries / Tools :NumPy,Pandas,Matplotlib,Scikit-learn ',
+      color: 'from-blue-400 to-cyan-500'
     },
     {
       icon: Palette,
       title: 'Web Design',
-      description: 'Modern UI/UX, responsive design, and interactive experiences',
-      color: 'from-pink-400 to-pink-600'
-    },
-    {
-      icon: Globe,
-      title: 'JavaScript',
-      description: 'ES6+, React, Node.js, and modern frameworks',
-      color: 'from-blue-400 to-blue-600'
+      description: 'HTML, CSS, TailwindCSS, Figma,NodeJS',
+      color: 'from-pink-400 to-rose-500'
     },
     {
       icon: Database,
       title: 'Database Management',
-      description: 'SQL, NoSQL, and database optimization',
-      color: 'from-green-400 to-green-600'
+      description: 'SQL, MongoDB',
+      color: 'from-cyan-500 to-blue-600'
     },
     {
       icon: GitBranch,
       title: 'Version Control',
       description: 'Git, GitHub, and collaborative development',
-      color: 'from-orange-400 to-orange-600'
-    },
-    {
-      icon: Server,
-      title: 'Backend Development',
-      description: 'RESTful APIs, microservices, and cloud deployment',
-      color: 'from-cyan-400 to-cyan-600'
-    },
-    {
-      icon: Smartphone,
-      title: 'Mobile Development',
-      description: 'React Native, Flutter, and cross-platform apps',
-      color: 'from-indigo-400 to-indigo-600'
-    },
-    {
-      icon: Cpu,
-      title: 'DevOps & Cloud',
-      description: 'Docker, AWS, CI/CD, and infrastructure automation',
-      color: 'from-red-400 to-red-600'
+      color: 'from-blue-500 to-indigo-600'
     }
   ];
 
   return (
-    <section id="skills" className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="container mx-auto">
-        <div className="glass-card hover-lift p-12">
-          <h2 className="text-4xl font-bold gradient-text text-center mb-12 animate-glow">
-            Skills & Expertise
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className="group glass-elevated p-6 rounded-2xl hover-lift transition-all duration-300 border border-glass-border relative overflow-hidden"
-              >
-                {/* Background Gradient Effect */}
-                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                
-                {/* Top Border Effect */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 bg-gradient-accent rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <skill.icon className="w-8 h-8 text-white" />
+    <>
+      {/* Background Effects */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
+        
+        {/* Floating ambient orbs */}
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-50"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-50"></div>
+      </div>
+
+      <section id="skills" className="relative min-h-screen flex items-center justify-center px-6 py-20 z-10">
+        <div className="container mx-auto">
+          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-12 animate-pulse">
+              Skills & Expertise
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="group backdrop-blur-2xl bg-white/15 border border-white/30 p-6 rounded-2xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105 hover:bg-white/25 relative overflow-hidden"
+                >
+                  {/* Background Gradient Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Top Border Effect */}
+                  <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${skill.color} transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500`}></div>
+                  
+                  <div className="relative z-10">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${skill.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg backdrop-blur-sm border border-white/20`}>
+                      <skill.icon className="w-8 h-8 text-white drop-shadow-sm" />
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold mb-3 text-slate-700 group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      {skill.title}
+                    </h3>
+                    
+                    <p className="text-slate-600 text-sm leading-relaxed">
+                      {skill.description}
+                    </p>
                   </div>
-                  
-                  <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:gradient-accent-text transition-all duration-300">
-                    {skill.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {skill.description}
-                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

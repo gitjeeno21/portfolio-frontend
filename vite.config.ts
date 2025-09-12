@@ -22,13 +22,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Optimize for mobile performance
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild', // Use esbuild instead of terser for better performance
     rollupOptions: {
       output: {
         manualChunks: {

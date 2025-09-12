@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Download, Mail, Github, Linkedin, Facebook, Instagram, Code, Brain, Sparkles, Zap } from 'lucide-react';
 import profileImg from '@/assets/profile.jpg';
+import { useMobilePerformance } from '@/hooks/use-mobile-performance';
 
-const Hero = () => {
+const Hero = memo(() => {
   const [currentRole, setCurrentRole] = useState(0);
+  const { isMobile, shouldReduceAnimations } = useMobilePerformance();
 
   const roles = [
     { text: 'Aspiring Python Developer', icon: Code, color: 'from-blue-600 to-blue-800' },
@@ -12,12 +14,15 @@ const Hero = () => {
     { text: 'Problem Solver', icon: Zap, color: 'from-purple-600 to-violet-700' }
   ];
 
+  // Optimize role switching - slower on mobile to reduce CPU usage
+  const roleInterval = shouldReduceAnimations ? 5000 : 3000;
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, 3000);
+    }, roleInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [roleInterval, roles.length]);
 
   const socialLinks = [
     { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:bg-blue-500/20 hover:border-blue-500/40' },
@@ -113,6 +118,9 @@ const Hero = () => {
                   src={profileImg}
                   alt="Jeeno Profile"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ willChange: 'auto' }}
                 />
               </div>
             </div>
@@ -121,6 +129,6 @@ const Hero = () => {
       </section>
     </div>
   );
-};
+});
 
 export default Hero;

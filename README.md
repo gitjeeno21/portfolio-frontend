@@ -1,73 +1,152 @@
-# Welcome to your Lovable project
+ README (Frontend)
 
-## Project info
+ Jeenokanth Modern Portfolio — Frontend
 
-**URL**: https://lovable.dev/projects/0cf3c9c3-f8bb-42d1-ad32-f3bd7726ab4d
+A modern, mobile-optimized portfolio frontend built with React, TypeScript, Vite, Tailwind CSS, and shadcn/ui. It features smooth navigation, responsive layouts, and reusable UI components.
 
-## How can I edit this code?
+### Tech Stack
 
-There are several ways of editing your application.
+- React 18 + TypeScript
+- Vite 5 (React SWC)
+- Tailwind CSS + `tailwindcss-animate`
+- shadcn/ui (Radix UI primitives)
+- React Router v6
+- React Query (`@tanstack/react-query`)
+- Recharts
+- Lucide Icons
 
-**Use Lovable**
+### Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0cf3c9c3-f8bb-42d1-ad32-f3bd7726ab4d) and start prompting.
+- Responsive pages: `Hero`, `About`, `Projects`, `Skills`, `Contact`
+- Reusable UI components via shadcn/ui
+- Code-splitting and optimized bundles
+- Mobile performance tweaks in Vite config
+- Router-based navigation and SPA-friendly 404 handling
 
-Changes made via Lovable will be committed automatically to this repo.
+### Getting Started
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+- Prerequisites: Node.js 18+ and npm
+- Install dependencies:
+```bash
+npm install
+```
+- Start dev server (defaults to port 8080 per `vite.config.ts`):
+```bash
 npm run dev
 ```
+- Lint:
+```bash
+npm run lint
+```
+- Build:
+```bash
+npm run build
+```
+- Preview local production build:
+```bash
+npm run preview
+```
 
-**Edit a file directly in GitHub**
+### Environment Variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Optional:
+  - `VITE_API_URL`: Base URL of your backend API (e.g., `https://your-backend.railway.app`)
 
-**Use GitHub Codespaces**
+Create a `.env` file in the project root if needed:
+```bash
+VITE_API_URL=https://your-backend.railway.app
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Project Scripts
 
-## What technologies are used for this project?
+- `npm run dev`: Start Vite dev server
+- `npm run build`: Production build to `dist`
+- `npm run build:dev`: Development-mode build (useful for inspecting bundles)
+- `npm run preview`: Preview built app
+- `npm run lint`: Run ESLint
 
-This project is built with:
+### Routing and SPA Config
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Client routing is handled by React Router.
+- `vercel.json` routes all non-file requests to `index.html`:
+```json
+{
+  "builds": [{ "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }],
+  "routes": [{ "handle": "filesystem" }, { "src": "/(.*)", "dest": "/index.html" }]
+}
+```
 
-## How can I deploy this project?
+### Vite Configuration Highlights
 
-Simply open [Lovable](https://lovable.dev/projects/0cf3c9c3-f8bb-42d1-ad32-f3bd7726ab4d) and click on Share -> Publish.
+- Dev server host and port:
+  - Host: `::` (IPv6), Port: `8080`
+- Path alias: `@` → `./src`
+- Build optimization:
+  - Target `es2015`
+  - `esbuild` minification
+  - Manual chunks for `vendor`, `ui`, and `icons`
+  - `chunkSizeWarningLimit: 1000`
+- Pre-bundled dependencies: `react`, `react-dom`, `lucide-react`
 
-## Can I connect a custom domain to my Lovable project?
+### Common Paths
 
-Yes, you can!
+- Entry: `src/main.tsx`
+- App Shell: `src/App.tsx`
+- Routes: `src/pages/Index.tsx`, `src/pages/NotFound.tsx`
+- Components: `src/components/*`
+- Styles: `src/index.css`, `src/App.css`
+- Assets: `src/assets/*`
+- UI primitives: `src/components/ui/*`
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Development Notes
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Use import alias:
+```ts
+import { Header } from "@/components/Header";
+```
+- When integrating the backend, read `DEPLOYMENT_GUIDE.md` for CORS and environment setup.
+- Prefer React Query for async data and caching.
+- Keep components accessible and keyboard-friendly (Radix UI helps here).
+
+### Building and Deploying
+
+- Build output: `dist/`
+- Deploy on Vercel:
+  - Framework: Vite
+  - Build command: `npm run build`
+  - Output directory: `dist`
+  - SPA routing supported by `vercel.json`
+- For full-stack guidance (including Railway backend and MongoDB Atlas), see `DEPLOYMENT_GUIDE.md`.
+
+### Folder Structure (Frontend)
+
+```text
+src/
+  assets/
+  components/
+    ui/
+  hooks/
+  lib/
+  pages/
+  App.css
+  App.tsx
+  index.css
+  main.tsx
+```
+
+### Accessibility and Performance
+
+- Leverages Radix primitives and shadcn/ui for baseline a11y
+- Optimized bundles through Vite manual chunks and esbuild
+- Mobile performance considerations in `vite.config.ts`
+
+### Troubleshooting
+
+- Blank screen after deploy: ensure SPA fallback rewrites to `index.html` (Vercel routing included)
+- 404 on refresh: same as above; verify `vercel.json` is part of the deploy
+- CORS/API errors: set `VITE_API_URL` and configure backend CORS to allow your Vercel domain
+
+### License
+
+MIT
+

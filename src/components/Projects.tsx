@@ -4,33 +4,24 @@ const Projects = () => {
   const projects = [
     {
       icon: Globe,
-      title: 'Advanced Portfolio Website',
-      description: 'A modern, responsive portfolio with advanced CSS animations, glassmorphism effects, and smooth interactions.',
-      tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      title: 'Automated On-Duty Request & Approval Web Portal',
+      description: 'A web portal to automate on-duty requests and approvals with real-time tracking.',
+      tags: ['Flask', 'SQL', 'HTML', 'CSS'],
       gradient: 'from-cyan-400 to-blue-500',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
       icon: Bot,
-      title: 'AI Chatbot Assistant',
-      description: 'Intelligent chatbot using natural language processing, machine learning models, and advanced conversation flow.',
-      tags: ['Python', 'NLP', 'TensorFlow', 'OpenAI API'],
+      title: 'File Organizer Automation using Python',
+      description: 'A Python script to organize files into categorized folders automatically.',
+      tags: ['Python', 'Automation', 'OS'],
       gradient: 'from-blue-400 to-cyan-500',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
       icon: BarChart3,
-      title: 'Student On-Duty Registration Portal',
-      description: ' Web portal for CSE students to submit and track On-Duty requests. Implemented with Flask backend and SQL database integration.',
-      tags: ['HTML', 'CSS','Tailwind CSS', 'PHP', 'MySQL'],
-      gradient: 'from-cyan-500 to-blue-600',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: Globe,
       title: 'E-commerce Platform',
       description: 'Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.',
       tags: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
@@ -39,19 +30,28 @@ const Projects = () => {
       githubUrl: '#'
     },
     {
+      icon: Globe,
+      title: 'Expense Tracker with Budget Alerts',
+      description: 'A tool to track expenses and send alerts when nearing budget limits.',
+      tags: ['React', 'Firebase', 'Tailwind CSS'],
+      gradient: 'from-green-400 to-teal-500',
+      liveUrl: '#',
+      githubUrl: '#'
+    },
+    {
       icon: Bot,
-      title: 'Cancer Mortality Rate Prediction ',
-      description: 'Automated ML model for predicting US cancer mortality rates with data preprocessing, model training, and Flask-based web deployment',
-      tags: ['Python', 'Scikit-learn', 'Flask', 'Pandas'],
+      title: 'Student Performance Analysis using Python & SQL',
+      description: 'Analyze student performance data to generate insights and reports.',
+      tags: ['Python', 'SQL', 'Pandas'],
       gradient: 'from-blue-500 to-cyan-600',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
       icon: BarChart3,
-      title: 'Advertisement Spending Prediction',
-      description: 'Regression model analyzing ad-spend vs. revenue to provide actionable insights for marketing decisions..',
-      tags: [ 'Python', 'NumPy', 'Pandas', 'Matplotlib'],
+      title: 'Exploratory Data Analysis (EDA) on Sales Dataset',
+      description: 'Perform EDA on sales data to uncover trends and insights.',
+      tags: ['Python', 'Matplotlib', 'Seaborn'],
       gradient: 'from-cyan-600 to-blue-700',
       liveUrl: '#',
       githubUrl: '#'

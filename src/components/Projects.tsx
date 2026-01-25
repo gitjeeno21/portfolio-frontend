@@ -6,7 +6,7 @@ const Projects = () => {
       icon: Globe,
       title: 'Automated On-Duty Request & Approval Web Portal',
       description: 'A web portal to automate on-duty requests and approvals with real-time tracking.',
-      tags: ['Flask', 'SQL', 'HTML', 'CSS'],
+      tags: ['HTML', 'CSS', 'PHP', 'Python', 'MySQL', 'TCPDF', 'pandas', 'matplotlib', 'PyPDF2'],
       gradient: 'from-cyan-400 to-blue-500',
       liveUrl: '#',
       githubUrl: '#'

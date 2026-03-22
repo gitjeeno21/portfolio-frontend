@@ -16,7 +16,7 @@ const Hero = memo(() => {
 
   // Optimize role switching - slower on mobile to reduce CPU usage
   const roleInterval = shouldReduceAnimations ? 5000 : 3000;
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
@@ -25,9 +25,8 @@ const Hero = memo(() => {
   }, [roleInterval, roles.length]);
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook', color: 'hover:bg-blue-500/20 hover:border-blue-500/40' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/jeenokanth21/', label: 'LinkedIn', color: 'hover:bg-blue-600/20 hover:border-blue-600/40' },
-    { icon: Instagram, href: 'https://www.instagram.com/____jk__.__/', label: 'Instagram', color: 'hover:bg-purple-500/20 hover:border-purple-500/40' },
+    { icon: Instagram, href: 'https://www.instagram.com/_jeeeno/', label: 'Instagram', color: 'hover:bg-purple-500/20 hover:border-purple-500/40' },
     { icon: Github, href: 'https://github.com/gitjeeno21', label: 'GitHub', color: 'hover:bg-slate-700/20 hover:border-slate-700/40' },
   ];
 
@@ -45,13 +44,13 @@ const Hero = memo(() => {
                 <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                   <span className="text-base sm:text-lg text-slate-600 font-medium">Hello, I'm a</span>
                 </div>
-                <div className="relative flex items-center justify-center lg:justify-start">
-                  <div className="backdrop-blur-xl bg-white/30 border border-white/40 rounded-2xl px-4 sm:px-6 py-2 sm:py-3 shadow-lg hover:shadow-blue-500/20 transition-all duration-300">
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg bg-gradient-to-r ${roles[currentRole].color} border border-white/30 shadow-lg`}>
+                <div className="relative flex items-center justify-center lg:justify-start w-full max-w-full overflow-hidden">
+                  <div className="backdrop-blur-xl bg-white/30 border border-white/40 rounded-2xl px-4 sm:px-6 py-2 sm:py-3 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 min-w-0 overflow-hidden">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className={`flex-shrink-0 p-2 rounded-lg bg-gradient-to-r ${roles[currentRole].color} border border-white/30 shadow-lg`}>
                         <CurrentIcon className="w-5 h-5 text-white" />
                       </div>
-                      <span className={`text-lg sm:text-xl font-semibold bg-gradient-to-r ${roles[currentRole].color} bg-clip-text text-transparent`}>
+                      <span className={`text-lg sm:text-xl font-semibold bg-gradient-to-r ${roles[currentRole].color} bg-clip-text text-transparent truncate`}>
                         {roles[currentRole].text}
                       </span>
                     </div>
@@ -67,7 +66,7 @@ const Hero = memo(() => {
                     Jeenokanth G
                   </span>
                 </h1>
-                
+
               </div>
 
               {/* Tagline / Description */}
@@ -79,23 +78,23 @@ const Hero = memo(() => {
               </div>
 
               {/* Action Buttons and Social Links */}
-              <div className="flex flex-col sm:flex-row lg:flex-row items-center gap-4 sm:gap-6">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6">
                 <a
-                  href="/Jeenokanth_Resume.pdf" // Place your resume as 'public/Jeenokanth_Resume.pdf'
+                  href="/JEENOKANTH G - RESUME.pdf" // Place your resume as 'public/Jeenokanth_Resume.pdf'
                   download
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition text-sm sm:text-base whitespace-nowrap"
                 >
                   <Download className="w-5 h-5" />
                   Download Resume
                 </a>
                 <a
                   href="mailto:jeenokanth21@gmail.com"
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-white border border-blue-200 text-blue-700 font-semibold shadow-lg hover:bg-blue-50 transition text-sm sm:text-base"
+                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-white border border-blue-200 text-blue-700 font-semibold shadow-lg hover:bg-blue-50 transition text-sm sm:text-base whitespace-nowrap"
                 >
                   <Mail className="w-5 h-5" />
                   Email Me
                 </a>
-                <div className="flex items-center gap-2 sm:gap-3 mt-4 lg:mt-0">
+                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center lg:justify-start mt-2 sm:mt-0">
                   {socialLinks.map((link) => (
                     <a
                       key={link.label}
@@ -115,7 +114,7 @@ const Hero = memo(() => {
             <div className="flex-shrink-0 mb-8 sm:mb-10 lg:mb-0 flex justify-center lg:justify-end w-full lg:w-auto">
               <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl border-4 border-blue-200 bg-white flex items-center justify-center">
                 <img
-                  src={profileImg}
+                  src="PFP.png"
                   alt="Jeeno Profile"
                   className="w-full h-full object-cover"
                   loading="lazy"

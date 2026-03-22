@@ -4,13 +4,11 @@ import {
   Palette, 
   Database, 
   GitBranch, 
-  Smartphone,
-  Server,
-  Globe,
-  Cpu
 } from 'lucide-react';
+import { useMobilePerformance } from '@/hooks/use-mobile-performance';
 
 const Skills = () => {
+  const { shouldReduceEffects } = useMobilePerformance();
   const skills = [
     {
       icon: Code,
@@ -50,9 +48,13 @@ const Skills = () => {
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
         
-        {/* Floating ambient orbs */}
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-50"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-50"></div>
+        {/* Floating ambient orbs - Optimized for mobile */}
+        {!shouldReduceEffects && (
+          <>
+            <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-50"></div>
+            <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-50"></div>
+          </>
+        )}
       </div>
 
       <section id="skills" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">

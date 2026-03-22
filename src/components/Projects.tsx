@@ -1,58 +1,51 @@
 import { Globe, Bot, BarChart3, ExternalLink, Github } from 'lucide-react';
+import { useMobilePerformance } from '@/hooks/use-mobile-performance';
 
 const Projects = () => {
+  const { isMobile, shouldReduceEffects } = useMobilePerformance();
   const projects = [
     {
       icon: Globe,
-      title: 'Automated On-Duty Request & Approval Web Portal',
-      description: 'A web portal to automate on-duty requests and approvals with real-time tracking.',
-      tags: ['HTML', 'CSS', 'PHP', 'Python', 'MySQL', 'TCPDF', 'pandas', 'matplotlib', 'PyPDF2'],
+      title: 'Automated On-Duty Web Portal',
+      description: 'A Django-based request system with automated approval workflows and real-time tracking.',
+      tags: ['Django', 'Python', 'PostgreSQL', 'Workflows'],
       gradient: 'from-cyan-400 to-blue-500',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
       icon: Bot,
-      title: 'File Organizer Automation using Python',
-      description: 'A Python script to organize files into categorized folders automatically.',
-      tags: ['Python', 'Automation', 'OS'],
+      title: 'AI Training Data Curation Bot',
+      description: 'Python bot for automated text cleaning, labeling, and preprocessing of large AI/ML datasets.',
+      tags: ['Python', 'AI/ML', 'Data Processing', 'Automation'],
       gradient: 'from-blue-400 to-cyan-500',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
-      icon: BarChart3,
-      title: 'E-commerce Platform',
-      description: 'Full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.',
-      tags: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
-      gradient: 'from-pink-400 to-rose-500',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: Globe,
-      title: 'Expense Tracker with Budget Alerts',
-      description: 'A tool to track expenses and send alerts when nearing budget limits.',
-      tags: ['React', 'Firebase', 'Tailwind CSS'],
-      gradient: 'from-green-400 to-teal-500',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
       icon: Bot,
-      title: 'Student Performance Analysis using Python & SQL',
-      description: 'Analyze student performance data to generate insights and reports.',
-      tags: ['Python', 'SQL', 'Pandas'],
-      gradient: 'from-blue-500 to-cyan-600',
+      title: 'File Organizer Automation',
+      description: 'Scripted automation to sort and manage files by extension, reducing manual organization time.',
+      tags: ['Python', 'OS Module', 'Automation', 'Utilities'],
+      gradient: 'from-teal-400 to-emerald-500',
       liveUrl: '#',
       githubUrl: '#'
     },
     {
       icon: BarChart3,
-      title: 'Exploratory Data Analysis (EDA) on Sales Dataset',
-      description: 'Perform EDA on sales data to uncover trends and insights.',
-      tags: ['Python', 'Matplotlib', 'Seaborn'],
-      gradient: 'from-cyan-600 to-blue-700',
+      title: 'Sales & Customer Data Analysis',
+      description: 'Comprehensive EDA and SQL analysis to uncover revenue trends and customer behavior patterns.',
+      tags: ['Python', 'SQL', 'Pandas', 'Matplotlib'],
+      gradient: 'from-indigo-400 to-blue-600',
+      liveUrl: '#',
+      githubUrl: '#'
+    },
+    {
+      icon: BarChart3,
+      title: 'Student Performance Analysis',
+      description: 'Data-driven insights into student metrics using SQL aggregation and visual analytics.',
+      tags: ['Python', 'SQL', 'Visual Analytics', 'Data Science'],
+      gradient: 'from-blue-500 to-cyan-700',
       liveUrl: '#',
       githubUrl: '#'
     }
@@ -64,9 +57,13 @@ const Projects = () => {
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
         
-        {/* Floating orbs for ambient effect */}
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
+        {/* Floating orbs for ambient effect - Optimized for mobile */}
+        {!shouldReduceEffects && (
+          <>
+            <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
+            <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
+          </>
+        )}
       </div>
 
       <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
@@ -80,7 +77,7 @@ const Projects = () => {
               {projects.map((project, index) => (
                 <div
                   key={index}
-                  className="group backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105 hover:bg-white/25 relative"
+                  className="group backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105 active:scale-[1.02] hover:bg-white/25 relative"
                 >
                   {/* Background Hover Effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -90,8 +87,8 @@ const Projects = () => {
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
                     <project.icon className="w-12 h-12 sm:w-16 sm:h-16 text-white z-10 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
                     
-                    {/* Project Actions - Show on Hover */}
-                    <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    {/* Project Actions - Always Visible on Mobile */}
+                    <div className={`absolute top-4 right-4 flex gap-2 transition-opacity duration-300 z-20 ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                       <button
                         className="p-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 rounded-lg transition-all duration-300 hover:scale-110 shadow-lg"
                         onClick={() => window.open(project.liveUrl, '_blank')}

@@ -78,12 +78,15 @@
   
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
   
   /* Animated Background - Optimized for mobile */
@@ -214,15 +217,37 @@
     .bg-gradient-to-r {
       background: linear-gradient(90deg, var(--tw-gradient-stops));
     }
-
-    /* Optimize transforms for mobile */
-    .hover\\:scale-105:hover {
-      transform: scale(1.02);
-    }
-
     /* Reduce shadow complexity on mobile */
     .shadow-2xl {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Disable pulse animation on mobile */
+    .animate-pulse {
+      animation: none !important;
+    }
+  }
+
+  /* Very small mobile (480px and below) */
+  @media (max-width: 480px) {
+    :root {
+      font-size: 14px;
+    }
+    
+    .glass-card {
+      padding: 1rem !important;
+    }
+  }
+
+  /* Ultra-narrow devices (320px and below) */
+  @media (max-width: 320px) {
+    :root {
+      font-size: 13px;
+    }
+
+    .container {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
     }
   }
 

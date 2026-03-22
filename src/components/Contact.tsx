@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import { useMobilePerformance } from '@/hooks/use-mobile-performance';
 
 const Contact = () => {
+  const { shouldReduceEffects } = useMobilePerformance();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,31 +31,18 @@ const Contact = () => {
       return;
     }
     setIsSubmitting(true);
-    try {
-      const apiUrl = import.meta.env.VITE_API_URL 
-        ? `${import.meta.env.VITE_API_URL}/api/messages`
-        : "http://localhost:5000/api/messages";
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const result = await response.json();
-      if (result.success) {
-        alert("Message sent successfully! Thank you for reaching out. I'll get back to you soon.");
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        alert(result.error || "Failed to send message.");
-      }
-    } catch (error) {
-      alert(error.message || "Server error. Please try again later.");
-    }
-    setIsSubmitting(false);
+    
+    // Construct WhatsApp message
+    const whatsappMessage = `Hello! I'm ${formData.name}. %0AEmail: ${formData.email} %0AMessage: ${formData.message}`;
+    const whatsappUrl = `https://wa.me/917867836030?text=${encodeURIComponent(whatsappMessage).replace(/%250A/g, '%0A')}`;
+    
+    // Simulate a brief loading state for better UX
+    setTimeout(() => {
+      window.open(whatsappUrl, '_blank');
+      setIsSubmitting(false);
+      // Optional: Clear form after redirection
+      setFormData({ name: '', email: '', message: '' });
+    }, 1000);
   };
 
   const contactInfo = [
@@ -66,7 +55,7 @@ const Contact = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 xxxxxxxxxx',
+      value: '+91 78678 36030',
       href: 'tel:+917867836030'
     },
     {
@@ -83,10 +72,14 @@ const Contact = () => {
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
         
-        {/* Floating ambient orbs */}
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-pink-200/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-2000 opacity-30"></div>
+        {/* Floating ambient orbs - Optimized for mobile */}
+        {!shouldReduceEffects && (
+          <>
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
+            <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
+            <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-pink-200/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-2000 opacity-30"></div>
+          </>
+        )}
       </div>
 
       <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
@@ -120,7 +113,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <div className="text-sm text-slate-500">{info.label}</div>
-                        <div className="text-slate-700 font-medium">{info.value}</div>
+                        <div className="text-slate-700 font-medium break-all">{info.value}</div>
                       </div>
                     </a>
                   ))}

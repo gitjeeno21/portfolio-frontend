@@ -1,133 +1,119 @@
-import { useState, useEffect, memo } from 'react';
-import { Download, Mail, Github, Linkedin, Facebook, Instagram, Code, Brain, Sparkles, Zap } from 'lucide-react';
-import profileImg from '@/assets/profile.jpg';
-import { useMobilePerformance } from '@/hooks/use-mobile-performance';
+import { ArrowUpRight, Check, Mail, Sparkles } from 'lucide-react';
 
-const Hero = memo(() => {
-  const [currentRole, setCurrentRole] = useState(0);
-  const { isMobile, shouldReduceAnimations } = useMobilePerformance();
+import Reveal from '@/components/Reveal';
+import profileImage from '@/assets/profile-portrait.webp';
 
-  const roles = [
-    { text: 'Aspiring Python Developer', icon: Code, color: 'from-blue-600 to-blue-800' },
-    { text: 'Final-Year CS Student', icon: Brain, color: 'from-indigo-600 to-purple-700' },
-    { text: 'AI & Generative AI Enthusiast', icon: Sparkles, color: 'from-blue-500 to-indigo-600' },
-    { text: 'Problem Solver', icon: Zap, color: 'from-purple-600 to-violet-700' }
-  ];
+const capabilityPills = ['MERN Stack', 'SEO Optimized', 'Mobile First', 'Digital Marketing'];
 
-  // Optimize role switching - slower on mobile to reduce CPU usage
-  const roleInterval = shouldReduceAnimations ? 5000 : 3000;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole((prev) => (prev + 1) % roles.length);
-    }, roleInterval);
-    return () => clearInterval(interval);
-  }, [roleInterval, roles.length]);
-
-  const socialLinks = [
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/jeenokanth21/', label: 'LinkedIn', color: 'hover:bg-blue-600/20 hover:border-blue-600/40' },
-    { icon: Instagram, href: 'https://www.instagram.com/_jeeeno/', label: 'Instagram', color: 'hover:bg-purple-500/20 hover:border-purple-500/40' },
-    { icon: Github, href: 'https://github.com/gitjeeno21', label: 'GitHub', color: 'hover:bg-slate-700/20 hover:border-slate-700/40' },
-  ];
-
-  const CurrentIcon = roles[currentRole].icon;
-
+const Hero = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20">
-      <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-28 lg:pt-32 z-10">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-24">
-            {/* Text Section */}
-            <div className="flex-1 text-center lg:text-left space-y-6 sm:space-y-8 max-w-2xl">
-              {/* Role Display */}
-              <div className="relative mb-8 mt-4">
-                <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                  <span className="text-base sm:text-lg text-slate-600 font-medium">Hello, I'm a</span>
-                </div>
-                <div className="relative flex items-center justify-center lg:justify-start w-full max-w-full overflow-hidden">
-                  <div className="backdrop-blur-xl bg-white/30 border border-white/40 rounded-2xl px-4 sm:px-6 py-2 sm:py-3 shadow-lg hover:shadow-blue-500/20 transition-all duration-300 min-w-0 overflow-hidden">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`flex-shrink-0 p-2 rounded-lg bg-gradient-to-r ${roles[currentRole].color} border border-white/30 shadow-lg`}>
-                        <CurrentIcon className="w-5 h-5 text-white" />
-                      </div>
-                      <span className={`text-lg sm:text-xl font-semibold bg-gradient-to-r ${roles[currentRole].color} bg-clip-text text-transparent truncate`}>
-                        {roles[currentRole].text}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <section
+      id="home"
+      className="section-shell relative isolate flex min-h-screen items-center overflow-hidden pb-16 pt-28 sm:pt-32 lg:pb-20 lg:pt-36"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-80"
+        aria-hidden="true"
+        style={{
+          background:
+            'radial-gradient(circle at 18% 22%, rgba(196, 164, 132, 0.16), transparent 28rem), radial-gradient(circle at 76% 18%, rgba(255, 255, 255, 0.78), transparent 24rem), radial-gradient(circle at 74% 40%, rgba(18, 48, 72, 0.075), transparent 24rem), radial-gradient(circle at 50% 70%, rgba(18, 48, 72, 0.05), transparent 36rem)',
+        }}
+      />
+      <div
+        className="hero-orb absolute -right-20 top-28 h-72 w-72 rounded-full bg-secondary/[0.08] blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -left-24 bottom-16 h-80 w-80 rounded-full bg-primary/[0.08] blur-3xl"
+        aria-hidden="true"
+      />
 
-              {/* Name & Title */}
-              <div className="relative mb-8">
-                <h1 className="text-3xl sm:text-4xl lg:text-4xl font-bold bg-gradient-to-r from-slate-800 via-blue-700 to-indigo-800 bg-clip-text text-transparent relative leading-tight">
-                  Jeenokanth G
-                  <span className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-indigo-600/15 to-purple-500/10 bg-clip-text text-transparent blur-2xl pointer-events-none select-none">
-                    Jeenokanth G
-                  </span>
-                </h1>
-
-              </div>
-
-              {/* Tagline / Description */}
-              <div className="relative backdrop-blur-xl bg-white/25 rounded-2xl p-4 sm:p-6 border border-white/40 shadow-lg hover:shadow-blue-500/10 transition-all duration-300 mb-8">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-600/5 rounded-2xl pointer-events-none select-none"></div>
-                <p className="relative text-base sm:text-lg text-slate-700 leading-relaxed">
-                  Passionate about <span className="font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Python,AI,Web Development </span>and solving real-world coding challenges
-                </p>
-              </div>
-
-              {/* Action Buttons and Social Links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6">
-                <a
-                  href="/JEENOKANTH G - RESUME.pdf" // Place your resume as 'public/Jeenokanth_Resume.pdf'
-                  download
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition text-sm sm:text-base whitespace-nowrap"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Resume
-                </a>
-                <a
-                  href="mailto:jeenokanth21@gmail.com"
-                  className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-xl bg-white border border-blue-200 text-blue-700 font-semibold shadow-lg hover:bg-blue-50 transition text-sm sm:text-base whitespace-nowrap"
-                >
-                  <Mail className="w-5 h-5" />
-                  Email Me
-                </a>
-                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center lg:justify-start mt-2 sm:mt-0">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className={`inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-slate-200 bg-white text-slate-700 shadow hover:scale-110 transition ${link.color}`}
-                    >
-                      <link.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
+      <div className="section-container relative z-10">
+        <div className="grid gap-12 lg:grid-cols-[0.84fr_1.08fr] lg:items-center lg:gap-16">
+          <Reveal className="max-w-[37rem]">
+            <div className="pill-badge w-fit">
+              <Sparkles className="h-4 w-4 text-secondary" />
+              Freelance websites, landing pages, and web apps
             </div>
-            {/* Profile Picture Section (Right Side) */}
-            <div className="flex-shrink-0 mb-8 sm:mb-10 lg:mb-0 flex justify-center lg:justify-end w-full lg:w-auto">
-              <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-xl border-4 border-blue-200 bg-white flex items-center justify-center">
+
+            <h1 className="font-display mt-6 max-w-[12ch] text-balance text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-6xl lg:text-[5rem] lg:leading-[0.95]">
+              Websites Built to Grow Your Business, Not Just Look Good
+            </h1>
+            <p className="mt-6 max-w-[40.625rem] text-pretty text-[1.05rem] leading-[1.82] text-muted-foreground sm:text-[1.25rem] sm:leading-[1.8]">
+              Modern websites, landing pages, and web applications designed to improve credibility,
+              visibility, and the quality of the leads your business receives online.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#contact" className="btn-premium w-full sm:w-auto">
+                Discuss your project
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <a href="#services" className="btn-secondary w-full sm:w-auto">
+                Explore services
+              </a>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {capabilityPills.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-sm font-bold text-foreground shadow-[0_8px_20px_rgba(18,48,72,0.05)]"
+                >
+                  <Check className="h-4 w-4 text-secondary" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="relative mx-auto w-full max-w-[42rem] lg:ml-auto">
+            <div
+              className="pointer-events-none absolute inset-6 -z-10 rounded-full blur-3xl"
+              aria-hidden="true"
+              style={{
+                background:
+                  'radial-gradient(circle, rgba(18, 48, 72, 0.08) 0%, rgba(18, 48, 72, 0) 72%)',
+              }}
+            />
+            <div className="hero-portrait-card group relative overflow-hidden rounded-[2.2rem] p-3">
+              <div className="hero-portrait-glow absolute inset-0" aria-hidden="true" />
+              <div className="mesh-panel absolute inset-0 opacity-55" aria-hidden="true" />
+              <div className="relative overflow-hidden rounded-[1.8rem] bg-primary/5">
                 <img
-                  src="PFP.png"
-                  alt="Jeeno Profile"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  src={profileImage}
+                  alt="Portrait of Jeenokanth G, freelance web developer"
+                  width={1100}
+                  height={1100}
+                  loading="eager"
                   decoding="async"
-                  style={{ willChange: 'auto' }}
+                  className="aspect-[4/5] w-full object-cover object-[50%_34%] transition-transform duration-300 group-hover:scale-[1.018] sm:aspect-[0.98/1]"
                 />
               </div>
             </div>
-          </div>
+
+            <div className="mt-5 flex flex-col gap-4 border border-white/75 bg-white/74 p-5 shadow-soft backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
+                  <Mail className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-base font-bold text-foreground">Let&apos;s discuss your project.</p>
+                  <p className="mt-1 text-sm leading-7 text-muted-foreground">
+                    Get a free consultation and project estimate for your business.
+                  </p>
+                </div>
+              </div>
+              <a href="#contact" className="btn-quiet">
+                Get Free Quote
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </Reveal>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
-});
+};
 
 export default Hero;

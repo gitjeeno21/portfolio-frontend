@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -18,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Manrope', 'sans-serif'],
+				display: ['Fraunces', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -50,38 +55,22 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				// Glass morphism colors
-				'glass-bg': 'hsl(var(--glass-bg))',
-				'glass-border': 'hsl(var(--glass-border))',
-				'glass-elevated': 'hsl(var(--glass-elevated))',
-				// Portfolio specific colors
-				portfolio: {
-					purple: 'hsl(var(--portfolio-purple))',
-					blue: 'hsl(var(--portfolio-blue))',
-					pink: 'hsl(var(--portfolio-pink))',
-					cyan: 'hsl(var(--portfolio-cyan))'
 				}
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
-				'gradient-accent': 'var(--gradient-accent)',
-				'gradient-glass': 'var(--gradient-glass)'
-			},
-			boxShadow: {
-				'glass': 'var(--shadow-glass)',
-				'glow': 'var(--shadow-glow)',
-				'hover': 'var(--shadow-hover)'
-			},
-			transitionTimingFunction: {
-				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
-				'spring': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+				'gradient-warm': 'var(--gradient-warm)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			boxShadow: {
+				soft: 'var(--shadow-soft)',
+				card: 'var(--shadow-card)',
+				strong: 'var(--shadow-strong)'
 			},
 			keyframes: {
 				'accordion-down': {
@@ -107,5 +96,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;

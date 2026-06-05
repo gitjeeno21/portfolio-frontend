@@ -1,41 +1,35 @@
 import { useEffect } from 'react';
 import { useMobilePerformance } from '@/hooks/use-mobile-performance';
 
+type NavigatorWithHints = Navigator & {
+  deviceMemory?: number;
+  connection?: {
+    effectiveType?: string;
+  };
+};
+
 const PerformanceMonitor = () => {
   const { isMobile, isLowEnd, shouldReduceAnimations, shouldReduceEffects } = useMobilePerformance();
 
   useEffect(() => {
-    // Log performance metrics in development
-    if (process.env.NODE_ENV === 'development') {
+    const navigatorWithHints = navigator as NavigatorWithHints;
+
+    if (import.meta.env.DEV) {
       console.log('Performance Settings:', {
         isMobile,
         isLowEnd,
         shouldReduceAnimations,
         shouldReduceEffects,
         userAgent: navigator.userAgent,
-        deviceMemory: (navigator as any).deviceMemory,
-        connection: (navigator as any).connection?.effectiveType,
+        deviceMemory: navigatorWithHints.deviceMemory,
+        connection: navigatorWithHints.connection?.effectiveType,
       });
     }
 
-    // Apply performance optimizations
-    if (shouldReduceEffects) {
-      // Disable heavy animations
-      document.documentElement.style.setProperty('--animation-duration', '0s');
-      document.documentElement.style.setProperty('--transition-duration', '0.1s');
-    }
-
-    // Optimize for mobile
-    if (isMobile) {
-      // Reduce viewport meta tag for better mobile performance
-      const viewport = document.querySelector('meta[name="viewport"]');
-      if (viewport) {
-        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-      }
-    }
+    document.documentElement.dataset.reducedEffects = shouldReduceEffects ? 'true' : 'false';
   }, [isMobile, isLowEnd, shouldReduceAnimations, shouldReduceEffects]);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
 export default PerformanceMonitor;

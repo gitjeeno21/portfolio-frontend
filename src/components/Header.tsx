@@ -1,5 +1,16 @@
-import { useState, useEffect } from 'react';
-import { Code, Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, Layers3, Menu, X } from 'lucide-react';
+
+import { cn } from '@/lib/utils';
+
+export const navItems = [
+  { id: 'services', label: 'Services' },
+  { id: 'work', label: 'Projects' },
+  { id: 'why-choose', label: 'Why Choose Me' },
+  { id: 'process', label: 'Process' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'contact', label: 'Contact' },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,152 +18,167 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-      const currentSection = sections.find(section => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveSection(visibleEntry.target.id);
         }
-        return false;
-      });
-      
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
-    };
+      },
+      {
+        rootMargin: '-30% 0px -55% 0px',
+        threshold: [0.18, 0.35, 0.55],
+      },
+    );
 
-    // Close mobile menu when clicking outside or on escape key
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        setIsMenuOpen(false);
-      }
-    };
+    ['home', ...navItems.map((item) => item.id)].forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
 
-    // Prevent body scroll when mobile menu is open
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('keydown', handleEscape);
-    } else {
-      document.body.style.overflow = 'unset';
-      document.removeEventListener('keydown', handleEscape);
-    }
+    const handleScroll = () => setIsScrolled(window.scrollY > 18);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
-    window.addEventListener('scroll', handleScroll);
     return () => {
+      observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
     };
   }, [isMenuOpen]);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    };
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-  ];
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <>
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/30 to-blue-50/30"></div>
-      </div>
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        isScrolled ? 'py-2.5' : 'py-3.5 sm:py-4',
+      )}
+    >
+      <div className="section-container">
+        <div
+          className={cn(
+            'nav-glass mx-auto flex max-w-6xl items-center justify-between rounded-full px-2.5 py-2 transition-all duration-300 sm:px-3.5',
+            isScrolled && 'nav-glass-scrolled',
+          )}
+        >
+          <a
+            href="#home"
+            onClick={closeMenu}
+            className="relative z-10 flex min-w-0 items-center gap-2.5 rounded-full pr-2 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/55 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label="Go to home section"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white shadow-soft">
+              <Layers3 className="h-[1.125rem] w-[1.125rem]" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-[0.62rem] font-extrabold uppercase tracking-[0.22em] text-secondary">
+                Freelance Web Developer
+              </span>
+              <span className="block truncate text-[0.98rem] font-extrabold text-foreground sm:text-base">
+                Jeenokanth
+              </span>
+            </span>
+          </a>
 
-      <header 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'backdrop-blur-3xl bg-white/20 py-4 border-b border-white/30 shadow-2xl shadow-cyan-500/10' 
-            : 'backdrop-blur-2xl bg-white/10 py-6'
-        }`}
-      >
-        <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="p-2 sm:p-3 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl shadow-2xl shadow-cyan-500/40 hover:scale-110 transition-transform duration-300">
-              <Code className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-            </div>
-            <span className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent">Jeenokanth</span>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex">
-            <ul className="flex gap-2">
+          <nav aria-label="Primary navigation" className="relative z-10 hidden lg:block">
+            <ul className="flex items-center gap-1.5 rounded-full border border-white/60 bg-white/[0.36] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-lg">
               {navItems.map((item) => (
                 <li key={item.id}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    className={`px-6 py-3 rounded-full font-medium transition-all duration-300 relative overflow-hidden ${
+                  <a
+                    href={`#${item.id}`}
+                    className={cn(
+                      'block rounded-full px-4 py-1.5 text-[0.95rem] font-bold transition-all duration-200 hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/55 focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:px-[1.125rem]',
                       activeSection === item.id
-                        ? 'text-white bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/40'
-                        : 'text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400/70 hover:to-blue-500/70'
-                    }`}
+                        ? 'bg-primary text-white shadow-soft'
+                        : 'text-muted-foreground hover:bg-white/[0.88] hover:text-foreground',
+                    )}
+                    aria-current={activeSection === item.id ? 'page' : undefined}
                   >
                     {item.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          {/* Mobile Menu Button */}
+          <a href="#contact" className="btn-premium relative z-10 hidden xl:inline-flex">
+            Request a quote
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-lg backdrop-blur-2xl bg-white/20 border border-white/30 text-slate-600 hover:text-cyan-600 transition-colors duration-300 z-50"
-            aria-label="Toggle mobile menu"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="relative z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/65 bg-white/[0.52] text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-lg transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/55 focus-visible:ring-offset-2 focus-visible:ring-offset-background lg:hidden"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation - Fixed positioning and improved styling */}
-        {isMenuOpen && (
-          <>
-            {/* Backdrop overlay */}
-            <div 
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-              onClick={() => setIsMenuOpen(false)}
-            />
-            
-            {/* Mobile menu */}
-            <div className="fixed top-20 right-4 left-4 md:hidden z-50 animate-in slide-in-from-top-2 duration-300">
-              <div className="backdrop-blur-3xl bg-white/90 border border-white/50 rounded-2xl p-6 shadow-2xl shadow-cyan-500/20">
-                <ul className="flex flex-col gap-2">
-                  {navItems.map((item) => (
-                    <li key={item.id}>
-                      <button
-                        onClick={() => scrollToSection(item.id)}
-                        className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
-                          activeSection === item.id
-                            ? 'text-white bg-gradient-to-r from-cyan-500 to-blue-600 shadow-lg'
-                            : 'text-slate-700 hover:text-white hover:bg-gradient-to-r hover:from-cyan-400/70 hover:to-blue-500/70'
-                        }`}
-                      >
-                        {item.label}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      {isMenuOpen ? (
+        <div className="lg:hidden">
+          <button
+            className="fixed inset-0 z-40 bg-primary/20 backdrop-blur-sm"
+            onClick={closeMenu}
+            aria-label="Close mobile menu overlay"
+          />
+          <nav
+            id="mobile-menu"
+            aria-label="Mobile navigation"
+            className="section-container fixed inset-x-0 top-[82px] z-50"
+          >
+            <div className="glass-panel mx-auto max-w-6xl rounded-[1.6rem] p-3">
+              <ul className="space-y-1">
+                {navItems.map((item) => (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      onClick={closeMenu}
+                      className={cn(
+                        'flex w-full items-center justify-between rounded-2xl px-4 py-3 text-left text-base font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary/55',
+                        activeSection === item.id
+                          ? 'bg-primary text-white shadow-soft'
+                          : 'text-foreground hover:bg-white',
+                      )}
+                      aria-current={activeSection === item.id ? 'page' : undefined}
+                    >
+                      <span>{item.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact" onClick={closeMenu} className="btn-premium mt-3 w-full">
+                Start a project
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
-          </>
-        )}
-      </header>
-    </>
+          </nav>
+        </div>
+      ) : null}
+    </header>
   );
 };
 

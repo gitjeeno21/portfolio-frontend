@@ -691,7 +691,7 @@ https://github.com/ksoltanidev/moveTheJam/blob/52d7803bee14c4720fedc838cf5f51080
 <!-- Update your portfolio details -->
 <h2>JEENOKANTH GUNASEKARAN</h2>
 <p>
-  📧 <a href="mailto:jeenojk01@gmail.com">jeenojk01@gmail.com</a> | 📱 +91-7867836030
+  <a href="mailto:jeenojk01@gmail.com">jeenojk01@gmail.com</a>
 </p>
 
 <h3>Objective</h3>
@@ -715,7 +715,7 @@ https://github.com/ksoltanidev/moveTheJam/blob/52d7803bee14c4720fedc838cf5f51080
   <li>Frameworks: Django, Flask</li>
   <li>Data Processing: Pandas, NumPy</li>
   <li>Databases: MySQL, PostgreSQL</li>
-  <li>Version Control: Git, GitHub</li>
+  <li>Version Control: Git</li>
   <li>Core Strengths: Data Structures & Algorithms, REST API Development, Automation</li>
 </ul>
 

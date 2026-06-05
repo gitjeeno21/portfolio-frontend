@@ -1,138 +1,63 @@
-import { Globe, Bot, BarChart3, ExternalLink, Github } from 'lucide-react';
-import { useMobilePerformance } from '@/hooks/use-mobile-performance';
+import { ArrowUpRight, LayoutTemplate, LineChart, Store } from 'lucide-react';
+
+import { Section } from '@/components/Section';
+
+const solutions = [
+  {
+    icon: Store,
+    title: 'Business website',
+    description:
+      'A complete website with the pages most businesses need to explain their services clearly and encourage new enquiries.',
+    includes: 'A good fit for service providers, clinics, consultants, studios, and local brands.',
+  },
+  {
+    icon: LayoutTemplate,
+    title: 'Offer landing page',
+    description:
+      'A single page built around one offer, one audience, and one clear next step such as booking, enquiry, or sign-up.',
+    includes: 'Useful for launches, promotions, workshops, advertisements, and seasonal campaigns.',
+  },
+  {
+    icon: LineChart,
+    title: 'Custom web app',
+    description:
+      'A tailored web app with dashboards, forms, internal tools, or database-backed features that support the way your business works.',
+    includes: 'Best for teams that need more than a standard website.',
+  },
+];
 
 const Projects = () => {
-  const { isMobile, shouldReduceEffects } = useMobilePerformance();
-  const projects = [
-    {
-      icon: Globe,
-      title: 'Automated On-Duty Web Portal',
-      description: 'A Django-based request system with automated approval workflows and real-time tracking.',
-      tags: ['Django', 'Python', 'PostgreSQL', 'Workflows'],
-      gradient: 'from-cyan-400 to-blue-500',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: Bot,
-      title: 'AI Training Data Curation Bot',
-      description: 'Python bot for automated text cleaning, labeling, and preprocessing of large AI/ML datasets.',
-      tags: ['Python', 'AI/ML', 'Data Processing', 'Automation'],
-      gradient: 'from-blue-400 to-cyan-500',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: Bot,
-      title: 'File Organizer Automation',
-      description: 'Scripted automation to sort and manage files by extension, reducing manual organization time.',
-      tags: ['Python', 'OS Module', 'Automation', 'Utilities'],
-      gradient: 'from-teal-400 to-emerald-500',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: BarChart3,
-      title: 'Sales & Customer Data Analysis',
-      description: 'Comprehensive EDA and SQL analysis to uncover revenue trends and customer behavior patterns.',
-      tags: ['Python', 'SQL', 'Pandas', 'Matplotlib'],
-      gradient: 'from-indigo-400 to-blue-600',
-      liveUrl: '#',
-      githubUrl: '#'
-    },
-    {
-      icon: BarChart3,
-      title: 'Student Performance Analysis',
-      description: 'Data-driven insights into student metrics using SQL aggregation and visual analytics.',
-      tags: ['Python', 'SQL', 'Visual Analytics', 'Data Science'],
-      gradient: 'from-blue-500 to-cyan-700',
-      liveUrl: '#',
-      githubUrl: '#'
-    }
-  ];
-
   return (
-    <>
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
-        
-        {/* Floating orbs for ambient effect - Optimized for mobile */}
-        {!shouldReduceEffects && (
-          <>
-            <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
-            <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
-          </>
-        )}
-      </div>
-
-      <section id="projects" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
-        <div className="container mx-auto">
-          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-8 sm:mb-12 animate-pulse">
-              Featured Projects
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="group backdrop-blur-2xl bg-white/15 border border-white/30 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-105 active:scale-[1.02] hover:bg-white/25 relative"
-                >
-                  {/* Background Hover Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Project Header */}
-                  <div className={`h-40 sm:h-48 bg-gradient-to-br ${project.gradient} relative flex items-center justify-center`}>
-                    <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                    <project.icon className="w-12 h-12 sm:w-16 sm:h-16 text-white z-10 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
-                    
-                    {/* Project Actions - Always Visible on Mobile */}
-                    <div className={`absolute top-4 right-4 flex gap-2 transition-opacity duration-300 z-20 ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                      <button
-                        className="p-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 rounded-lg transition-all duration-300 hover:scale-110 shadow-lg"
-                        onClick={() => window.open(project.liveUrl, '_blank')}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </button>
-                      <button
-                        className="p-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border border-white/30 rounded-lg transition-all duration-300 hover:scale-110 shadow-lg"
-                        onClick={() => window.open(project.githubUrl, '_blank')}
-                      >
-                        <Github className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                  
-                  {/* Project Content */}
-                  <div className="p-4 sm:p-6 relative z-10">
-                    <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-slate-700 group-hover:bg-gradient-to-r group-hover:from-cyan-600 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
-                      {project.title}
-                    </h3>
-                    
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
-                      {project.description}
-                    </p>
-                    
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-2 sm:px-3 py-1 text-xs backdrop-blur-xl bg-white/20 border border-white/40 rounded-full text-slate-600 group-hover:border-cyan-400/50 group-hover:bg-white/30 transition-all duration-300"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
+    <Section
+      id="work"
+      eyebrow="Project Types"
+      title="Common ways I support businesses online"
+      description="These examples show the kinds of projects I can take on. Each one is shaped around your goals, your customers, and the stage your business is in."
+    >
+      <div className="divide-y divide-border border-y border-border">
+        {solutions.map((solution) => (
+          <div key={solution.title} className="grid gap-6 py-8 lg:grid-cols-[0.28fr_0.42fr_0.3fr] lg:items-start">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary">
+                <solution.icon className="h-5 w-5" />
+              </div>
+              <h3 className="text-2xl font-semibold text-foreground">{solution.title}</h3>
+            </div>
+            <p className="text-lg leading-8 text-muted-foreground">{solution.description}</p>
+            <div>
+              <p className="text-base font-semibold leading-7 text-foreground">{solution.includes}</p>
+              <a
+                href="#contact"
+                className="mt-4 inline-flex items-center gap-2 text-base font-semibold text-primary transition-colors hover:text-secondary"
+              >
+                Ask about this project
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </Section>
   );
 };
 

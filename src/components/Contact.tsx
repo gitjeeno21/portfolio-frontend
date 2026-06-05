@@ -1,182 +1,281 @@
-import { useState } from 'react';
-import { Send, Mail, Phone, MapPin } from 'lucide-react';
-import { useMobilePerformance } from '@/hooks/use-mobile-performance';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { ArrowUpRight, CheckCircle2, Mail, MapPin } from 'lucide-react';
+
+import { Section } from '@/components/Section';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+
+const contactEmail = 'jeenojk01@gmail.com';
+
+const contactInfo = [
+  {
+    label: 'Email',
+    value: contactEmail,
+    href: `mailto:${contactEmail}`,
+    icon: Mail,
+  },
+  {
+    label: 'Location',
+    value: 'India / Remote',
+    icon: MapPin,
+  },
+];
+
+const serviceOptions = ['Website', 'Web App', 'SEO', 'Digital Marketing'];
+const timelineOptions = ['As soon as possible', 'This month', 'Next 1-2 months', 'Just exploring'];
+
+const initialState = {
+  name: '',
+  business: '',
+  email: '',
+  service: serviceOptions[0],
+  timeline: timelineOptions[0],
+  message: '',
+};
 
 const Contact = () => {
-  const { shouldReduceEffects } = useMobilePerformance();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState(initialState);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const isFormValid =
+    formData.name.trim().length > 0 &&
+    formData.email.trim().length > 0 &&
+    formData.service.trim().length > 0 &&
+    formData.message.trim().length > 0;
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (isSubmitted) {
+      setIsSubmitted(false);
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Client-side validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      alert("All fields are required.");
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-    setIsSubmitting(true);
-    
-    // Construct WhatsApp message
-    const whatsappMessage = `Hello! I'm ${formData.name}. %0AEmail: ${formData.email} %0AMessage: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/917867836030?text=${encodeURIComponent(whatsappMessage).replace(/%250A/g, '%0A')}`;
-    
-    // Simulate a brief loading state for better UX
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
-      setIsSubmitting(false);
-      // Optional: Clear form after redirection
-      setFormData({ name: '', email: '', message: '' });
-    }, 1000);
-  };
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'jeenojk01@gmail.com',
-      href: 'mailto:jeenojk01@gmail.com'
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+91 78678 36030',
-      href: 'tel:+917867836030'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Tamilnadu,India',
-      href: '#'
-    }
-  ];
+    const subjectSource = formData.business.trim() || formData.name.trim();
+    const messageBody = [
+      `Name: ${formData.name}`,
+      `Business: ${formData.business || 'Not provided'}`,
+      `Email: ${formData.email}`,
+      `Service needed: ${formData.service}`,
+      `Timeline: ${formData.timeline}`,
+      '',
+      'Project details:',
+      formData.message,
+    ].join('\n');
+
+    const mailtoLink = `mailto:${contactEmail}?subject=${encodeURIComponent(
+      `Project enquiry from ${subjectSource}`,
+    )}&body=${encodeURIComponent(messageBody)}`;
+
+    setIsSubmitted(true);
+    setFormData(initialState);
+    window.location.href = mailtoLink;
+  };
 
   return (
-    <>
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-cyan-50/20 to-blue-50/20"></div>
-        
-        {/* Floating ambient orbs - Optimized for mobile */}
-        {!shouldReduceEffects && (
-          <>
-            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-200/30 to-blue-300/30 rounded-full blur-3xl animate-pulse opacity-40"></div>
-            <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-blue-200/30 to-cyan-300/30 rounded-full blur-3xl animate-pulse delay-1000 opacity-40"></div>
-            <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-pink-200/20 to-rose-300/20 rounded-full blur-3xl animate-pulse delay-2000 opacity-30"></div>
-          </>
-        )}
-      </div>
+    <Section
+      id="contact"
+      eyebrow="Contact"
+      title="Tell me about your business and what you need online"
+      description="Send a short message and I will help you choose the right website, landing page, web app, or update for your goals."
+    >
+      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="space-y-8">
+          <div>
+            <h3 className="text-3xl font-semibold leading-tight text-foreground">
+              A strong first message can be short.
+            </h3>
+            <p className="mt-4 text-lg leading-8 text-muted-foreground">
+              Share what your business does, what you want to build or improve, and what kind of
+              result you want. I will reply with a practical next step.
+            </p>
+          </div>
 
-      <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-12 sm:py-20 z-10">
-        <div className="container mx-auto">
-          <div className="backdrop-blur-3xl bg-white/20 border border-white/30 rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-slate-700 via-cyan-600 to-blue-600 bg-clip-text text-transparent text-center mb-8 sm:mb-12 animate-pulse">
-              Get In Touch
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-              {/* Contact Information */}
-              <div className="space-y-6 sm:space-y-8">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-slate-700">
-                    Let's work together
-                  </h3>
-                  <p className="text-slate-600 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-                    I'm always interested in new opportunities and interesting projects. 
-                    Whether you have a question or just want to say hi, I'll try my best 
-                    to get back to you!
-                  </p>
+          <div className="space-y-4">
+            {contactInfo.map((info) => {
+              const content = (
+                <>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <info.icon className="h-5 w-5" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-base text-muted-foreground">{info.label}</p>
+                    <p className="truncate text-lg font-semibold text-foreground">{info.value}</p>
+                  </div>
+                </>
+              );
+
+              if (info.href) {
+                return (
+                  <a key={info.label} href={info.href} className="flex items-center gap-4">
+                    {content}
+                  </a>
+                );
+              }
+
+              return (
+                <div key={info.label} className="flex items-center gap-4">
+                  {content}
                 </div>
-                <div className="space-y-6">
-                  {contactInfo.map((info, index) => (
-                    <a
-                      key={index}
-                      href={info.href}
-                      className="flex items-center gap-4 p-4 backdrop-blur-2xl bg-white/15 border border-white/30 rounded-xl hover:bg-white/25 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 group hover:scale-105"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-cyan-500/30">
-                        <info.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <div className="text-sm text-slate-500">{info.label}</div>
-                        <div className="text-slate-700 font-medium break-all">{info.value}</div>
-                      </div>
-                    </a>
-                  ))}
+              );
+            })}
+          </div>
+
+          <div className="border-t border-border pt-6">
+            <p className="text-sm font-bold uppercase tracking-[0.22em] text-secondary">
+              Helpful details
+            </p>
+            <div className="mt-4 space-y-3">
+              {[
+                'Your business or brand name',
+                'The kind of website or service you need',
+                'What you want the website to help you achieve',
+                'Any current website links or references',
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3 text-base leading-7 text-foreground">
+                  <span className="mt-2 h-2 w-2 rounded-full bg-secondary" />
+                  <span>{item}</span>
                 </div>
-              </div>
-              {/* Contact Form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full backdrop-blur-2xl bg-white/15 border border-white/30 focus:border-cyan-400 h-12 rounded-xl px-4 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
-                  />
-                </div>
-                <div>
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full backdrop-blur-2xl bg-white/15 border border-white/30 focus:border-cyan-400 h-12 rounded-xl px-4 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
-                  />
-                </div>
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={6}
-                    className="w-full backdrop-blur-2xl bg-white/15 border border-white/30 focus:border-cyan-400 rounded-xl px-4 py-3 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-12 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 hover:shadow-2xl hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Sending...
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center gap-2">
-                      <Send className="w-5 h-5" />
-                      Send Message
-                    </div>
-                  )}
-                </button>
-              </form>
+              ))}
             </div>
           </div>
         </div>
-      </section>
-    </>
+
+        <form onSubmit={handleSubmit} className="rounded-lg border border-border bg-white p-5 shadow-[var(--shadow-soft)] sm:p-7" noValidate>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-base font-semibold text-foreground">
+                Name
+              </label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="field-base"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="business" className="text-base font-semibold text-foreground">
+                Business
+              </label>
+              <Input
+                id="business"
+                name="business"
+                type="text"
+                placeholder="Business or brand name"
+                value={formData.business}
+                onChange={handleInputChange}
+                className="field-base"
+              />
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-base font-semibold text-foreground">
+                Email
+              </label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@business.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="field-base"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="service" className="text-base font-semibold text-foreground">
+                Service
+              </label>
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleInputChange}
+                className="field-base w-full appearance-none"
+              >
+                {serviceOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="mt-5 space-y-2">
+            <label htmlFor="timeline" className="text-base font-semibold text-foreground">
+              Timeline
+            </label>
+            <select
+              id="timeline"
+              name="timeline"
+              value={formData.timeline}
+              onChange={handleInputChange}
+              className="field-base w-full appearance-none"
+            >
+              {timelineOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mt-5 space-y-2">
+              <label htmlFor="message" className="text-base font-semibold text-foreground">
+              Project details
+              </label>
+            <Textarea
+              id="message"
+              name="message"
+              placeholder="Tell me about your business, the kind of website or feature you need, and what you want customers to do."
+              value={formData.message}
+              onChange={handleInputChange}
+              required
+              rows={7}
+              className="field-base min-h-[180px] resize-y py-3"
+            />
+          </div>
+
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-base leading-7 text-muted-foreground">
+              Submitting opens your email app with your message already prepared.
+            </p>
+            <Button type="submit" disabled={!isFormValid} className="btn-premium w-full sm:w-auto">
+              Open email draft
+              <ArrowUpRight className="h-4 w-4" />
+            </Button>
+          </div>
+
+          {isSubmitted ? (
+            <div className="mt-5 flex items-start gap-3 rounded-lg border border-emerald-500/20 bg-emerald-50 p-4 text-base text-emerald-900">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+              <div>
+                <p className="font-semibold text-emerald-900">Email draft ready</p>
+                <p className="mt-1 text-emerald-800">
+                  Your default mail app should open so you can review and send the message directly.
+                </p>
+              </div>
+            </div>
+          ) : null}
+        </form>
+      </div>
+    </Section>
   );
 };
 

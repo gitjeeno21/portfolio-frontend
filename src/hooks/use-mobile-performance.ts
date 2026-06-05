@@ -1,5 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 
+type NavigatorWithHints = Navigator & {
+  deviceMemory?: number;
+  connection?: {
+    effectiveType?: string;
+  };
+};
+
 export const useMobilePerformance = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isLowEnd, setIsLowEnd] = useState(false);
@@ -7,21 +14,19 @@ export const useMobilePerformance = () => {
   const checkDevice = useCallback(() => {
     const width = window.innerWidth;
     const isMobileDevice = width < 768;
+    const navigatorWithHints = navigator as NavigatorWithHints;
+
     setIsMobile(isMobileDevice);
 
-    // Detect low-end devices based on various factors
-    const isLowEndDevice = 
-      isMobileDevice && (
-        // Check for reduced motion preference
+    const isLowEndDevice =
+      isMobileDevice &&
+      (
         window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-        // Check for low memory (approximate)
-        (navigator as any).deviceMemory && (navigator as any).deviceMemory < 4 ||
-        // Check for slow connection
-        (navigator as any).connection && (navigator as any).connection.effectiveType === 'slow-2g' ||
-        // Check for low pixel density (older devices)
+        (navigatorWithHints.deviceMemory !== undefined && navigatorWithHints.deviceMemory < 4) ||
+        navigatorWithHints.connection?.effectiveType === 'slow-2g' ||
         window.devicePixelRatio < 1.5
       );
-    
+
     setIsLowEnd(isLowEndDevice);
   }, []);
 
@@ -29,7 +34,7 @@ export const useMobilePerformance = () => {
     checkDevice();
     window.addEventListener('resize', checkDevice);
     window.addEventListener('orientationchange', checkDevice);
-    
+
     return () => {
       window.removeEventListener('resize', checkDevice);
       window.removeEventListener('orientationchange', checkDevice);

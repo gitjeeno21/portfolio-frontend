@@ -4,13 +4,13 @@ import Reveal from '@/components/Reveal';
 const internships = [
   {
     title: 'Data Analytics Intern',
-    company: 'Solubix',
+    company: 'Solublix',
     location: 'Krishnagiri',
     dates: 'Jan 2026 – Mar 2026',
     responsibilities: [
-      'Analysed structured datasets using Python, Pandas, and NumPy to identify meaningful patterns and insights.',
-      'Cleaned and processed datasets to improve data quality and consistency.',
-      'Prepared analytical reports to support internal decision-making and transformed raw data into useful information through analytical and problem-solving skills.',
+      'Analysed structured datasets with Python, Pandas, and NumPy to uncover patterns and insights.',
+      'Cleaned and preprocessed data to improve quality and consistency for downstream analysis.',
+      'Prepared analytical reports to support internal decision-making.',
     ],
   },
   {
@@ -19,9 +19,9 @@ const internships = [
     location: 'Krishnagiri',
     dates: 'Mar 2026 – May 2026',
     responsibilities: [
-      'Worked on web applications using the MERN stack, including frontend, backend, and database integration.',
-      'Developed and supported application features based on project requirements.',
-      'Worked with databases, assisted with website deployment and configuration, and gained experience in troubleshooting, teamwork, and delivering technical solutions.',
+      'Built and supported web application features across the frontend, backend, and database layers using the MERN stack.',
+      'Worked with databases and assisted with website deployment and configuration.',
+      'Troubleshot issues and delivered technical solutions in a team environment.',
     ],
   },
 ];
@@ -31,7 +31,7 @@ const Experience = () => (
     id="experience"
     eyebrow="Experience"
     title="Professional experience"
-    description="Internship experience across data analytics and web application development."
+    description="Hands-on experience in data analytics and full-stack development, the foundation for building and deploying AI/ML applications."
   >
     <div className="experience-timeline">
       {internships.map((internship, index) => (

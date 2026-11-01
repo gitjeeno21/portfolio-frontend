@@ -11,17 +11,17 @@ A modern, mobile-optimized portfolio frontend built with React, TypeScript, Vite
 - Tailwind CSS + `tailwindcss-animate`
 - shadcn/ui (Radix UI primitives)
 - React Router v6
-- React Query (`@tanstack/react-query`)
-- Recharts
 - Lucide Icons
 
 ### Features
 
-- Responsive pages: `Hero`, `About`, `Projects`, `Skills`, `Contact`
-- Reusable UI components via shadcn/ui
-- Code-splitting and optimized bundles
-- Mobile performance tweaks in Vite config
-- Router-based navigation and SPA-friendly 404 handling
+- Responsive sections: `Hero`, `About`, `Education`, `Experience`, `Expertise`, `Certifications`, `Projects`, `Contact`, and `Footer`
+- Minimal dark theme with subtle gradient outlines and glass cards
+- Single dark theme with no theme toggle
+- Responsive navigation, keyboard focus states, and reduced-motion support
+- Resume-backed portfolio content with SEO and social-sharing metadata
+- Optimized production bundles and text-based social metadata
+- Section-anchor navigation and SPA-friendly 404 handling
 
 ### Getting Started
 
@@ -47,16 +47,6 @@ npm run build
 npm run preview
 ```
 
-### Environment Variables
-
-- Optional:
-  - `VITE_API_URL`: Base URL of your backend API (e.g., `https://your-backend.railway.app`)
-
-Create a `.env` file in the project root if needed:
-```bash
-VITE_API_URL=https://your-backend.railway.app
-```
-
 ### Project Scripts
 
 - `npm run dev`: Start Vite dev server
@@ -67,7 +57,7 @@ VITE_API_URL=https://your-backend.railway.app
 
 ### Routing and SPA Config
 
-- Client routing is handled by React Router.
+- Route handling is provided by React Router.
 - `vercel.json` routes all non-file requests to `index.html`:
 ```json
 {
@@ -94,18 +84,17 @@ VITE_API_URL=https://your-backend.railway.app
 - App Shell: `src/App.tsx`
 - Routes: `src/pages/Index.tsx`, `src/pages/NotFound.tsx`
 - Components: `src/components/*`
-- Styles: `src/index.css`, `src/App.css`
+- Styles: `src/index.css`, `src/portfolio.css`
 - Assets: `src/assets/*`
 - UI primitives: `src/components/ui/*`
 
 ### Development Notes
 
-- Use import alias:
+- Use the default export with the import alias:
 ```ts
-import { Header } from "@/components/Header";
+import Header from "@/components/Header";
 ```
-- When integrating the backend, read `DEPLOYMENT_GUIDE.md` for CORS and environment setup.
-- Prefer React Query for async data and caching.
+- Read `DEPLOYMENT_GUIDE.md` for frontend deployment steps.
 - Keep components accessible and keyboard-friendly (Radix UI helps here).
 
 ### Building and Deploying
@@ -116,7 +105,7 @@ import { Header } from "@/components/Header";
   - Build command: `npm run build`
   - Output directory: `dist`
   - SPA routing supported by `vercel.json`
-- For full-stack guidance (including Railway backend and MongoDB Atlas), see `DEPLOYMENT_GUIDE.md`.
+- For deployment steps, see `DEPLOYMENT_GUIDE.md`.
 
 ### Folder Structure (Frontend)
 
@@ -128,7 +117,6 @@ src/
   hooks/
   lib/
   pages/
-  App.css
   App.tsx
   index.css
   main.tsx
@@ -136,17 +124,16 @@ src/
 
 ### Accessibility and Performance
 
-- Leverages Radix primitives and shadcn/ui for baseline a11y
-- Optimized bundles through Vite manual chunks and esbuild
-- Mobile performance considerations in `vite.config.ts`
+- Includes a skip link, visible focus states, reduced-motion support, and a keyboard-operable mobile menu
+- Uses a dark-only palette without a theme toggle
+- Builds with Vite and esbuild; verify production output with `npm run build`
 
 ### Troubleshooting
 
 - Blank screen after deploy: ensure SPA fallback rewrites to `index.html` (Vercel routing included)
 - 404 on refresh: same as above; verify `vercel.json` is part of the deploy
-- CORS/API errors: set `VITE_API_URL` and configure backend CORS to allow your Vercel domain
+- Check the deployment platform logs if the production build fails
 
 ### License
 
 MIT
-

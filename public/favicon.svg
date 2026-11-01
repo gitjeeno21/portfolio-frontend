@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="edge" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff426a"/>
+      <stop offset="1" stop-color="#3be1ff"/>
+    </linearGradient>
+    <linearGradient id="letters" x1="0" x2="1">
+      <stop offset="0" stop-color="#f5f7fb"/>
+      <stop offset="1" stop-color="#9ca6b8"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="19" fill="#05060f"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="18.5" fill="none" stroke="url(#edge)" stroke-opacity=".8"/>
+  <text x="32" y="42" fill="url(#letters)" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="-2" text-anchor="middle">JG</text>
+</svg>

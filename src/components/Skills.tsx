@@ -1,86 +1,81 @@
-import { BadgeCheck, Gauge, Handshake, Search, Smartphone, Target } from 'lucide-react';
+import { BrainCircuit, Database, Network, PanelsTopLeft } from 'lucide-react';
 
+import Reveal from '@/components/Reveal';
 import { Section } from '@/components/Section';
 
-const reasons = [
+const expertiseAreas = [
   {
-    icon: Target,
-    title: 'Clear business messaging',
-    description:
-      'Your pages should explain what you offer in a way customers can understand quickly.',
+    title: 'AI / MACHINE LEARNING',
+    icon: BrainCircuit,
+    description: 'Predictive modelling and evaluation across regression, classification, clustering, and forecasting.',
+    skills: [
+      'Regression',
+      'Classification',
+      'Clustering',
+      'Forecasting',
+      'Scikit-learn',
+      'Model evaluation',
+    ],
   },
   {
-    icon: Handshake,
-    title: 'Direct communication',
-    description:
-      'You speak directly with the person doing the work, which keeps the project simple and responsive.',
+    title: 'PYTHON & DATA ANALYTICS',
+    icon: Database,
+    description: 'Working with structured data, exploratory analysis, and visualization.',
+    skills: [
+      'Python',
+      'SQL (Oracle)',
+      'Pandas',
+      'NumPy',
+      'Data cleaning & preprocessing',
+      'Feature engineering',
+      'EDA',
+      'Power BI',
+      'Matplotlib',
+      'Seaborn',
+    ],
   },
   {
-    icon: Smartphone,
-    title: 'Mobile-ready pages',
-    description:
-      'Your site is built to work well on phones, tablets, and desktops where customers browse every day.',
+    title: 'GENERATIVE AI',
+    icon: Network,
+    description: 'Building retrieval-augmented systems grounded in document knowledge.',
+    skills: ['RAG', 'LLMs', 'Embeddings', 'Vector databases'],
   },
   {
-    icon: Gauge,
-    title: 'Fast, reliable experience',
-    description:
-      'Visitors should be able to read, browse, and contact you without delays or clutter getting in the way.',
-  },
-  {
-    icon: Search,
-    title: 'Search-friendly setup',
-    description:
-      'Page structure, content organisation, and page details are prepared with search visibility in mind.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'Stronger credibility online',
-    description:
-      'Service details, FAQs, and proof points help visitors feel more confident about contacting you.',
+    title: 'WEB DEVELOPMENT',
+    icon: PanelsTopLeft,
+    description: 'Web application experience across frontend, backend, and database integration.',
+    skills: ['Django', 'MERN Stack', 'MongoDB'],
   },
 ];
 
-const Skills = () => {
-  return (
-    <Section
-      id="why-choose"
-      eyebrow="Why Work With Me"
-      title="A practical website partner for businesses that want a stronger online presence"
-      description="Every page should help people understand your business, feel confident in your service, and know how to reach you."
-      contentClassName="mt-12"
-    >
-      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        <div className="max-w-xl">
-          <p className="text-xl font-semibold leading-8 text-foreground">
-            I keep the work grounded in what matters most: your business goals, your customers, and
-            the information people need before they decide to contact you.
-          </p>
-          <p className="mt-5 text-lg leading-8 text-muted-foreground">
-            The result is a website that feels professional, easy to use, and much easier for your
-            customers to act on.
-          </p>
-          <a href="#contact" className="btn-premium mt-8">
-            Discuss your project
-          </a>
-        </div>
+const tools = ['Git', 'GitHub', 'Jupyter Notebook'];
 
-        <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
-          {reasons.map((item) => (
-            <div key={item.title} className="flex gap-4 border-t border-border pt-5">
-              <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <item.icon className="h-5 w-5" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-2 text-base leading-7 text-muted-foreground">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </Section>
-  );
-};
+const Skills = () => (
+  <Section
+    id="expertise"
+    eyebrow="Expertise"
+    title="Areas of expertise"
+    description="Core areas and tools drawn from my internship and academic project experience."
+  >
+    <div className="expertise-layout">
+      {expertiseAreas.map((area, index) => (
+        <Reveal className={`expertise-card expertise-card-${index + 1} glass-card`} key={area.title} delay={index * 60} spotlight>
+          <area.icon className="expertise-icon" aria-hidden="true" />
+          <h3>{area.title}</h3>
+          <p>{area.description}</p>
+          <ul className="expertise-tags">
+            {area.skills.map((skill) => <li key={skill}>{skill}</li>)}
+          </ul>
+        </Reveal>
+      ))}
+    </div>
+
+    <div className="tools-row">
+      <h3>Tools</h3>
+      {tools.map((tool) => <span key={tool}>{tool}</span>)}
+    </div>
+
+  </Section>
+);
 
 export default Skills;

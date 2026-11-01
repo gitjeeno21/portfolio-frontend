@@ -4,10 +4,11 @@ import tailwindcssAnimate from "tailwindcss-animate";
 export default {
 	darkMode: ["class"],
 	content: [
-		"./pages/**/*.{ts,tsx}",
-		"./components/**/*.{ts,tsx}",
-		"./app/**/*.{ts,tsx}",
-		"./src/**/*.{ts,tsx}",
+		"./index.html",
+		"./src/App.tsx",
+		"./src/main.tsx",
+		"./src/pages/**/*.{ts,tsx}",
+		"./src/components/{About,Certifications,Contact,Education,Experience,Header,Hero,Projects,Reveal,Section,Skills}.tsx",
 	],
 	prefix: "",
 	theme: {
@@ -20,8 +21,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['Manrope', 'sans-serif'],
-				display: ['Fraunces', 'serif'],
+				sans: ['Inter', 'Segoe UI', 'sans-serif'],
+				display: ['Inter', 'Segoe UI', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -32,17 +33,14 @@ export default {
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))',
-					glow: 'hsl(var(--secondary-glow))'
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
 					foreground: 'hsl(var(--accent-foreground))',
-					glow: 'hsl(var(--accent-glow))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
@@ -56,11 +54,6 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				}
-			},
-			backgroundImage: {
-				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-secondary': 'var(--gradient-secondary)',
-				'gradient-warm': 'var(--gradient-warm)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

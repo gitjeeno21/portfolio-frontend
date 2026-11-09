@@ -6,7 +6,7 @@ const education = [
     qualification: 'B.E. in Computer Science and Engineering',
     institution: 'Adhiyamaan College of Engineering, Hosur',
     dates: '2022–2026',
-    result: 'CGPA: 7.6/10',
+    result: 'CGPA: 7.47/10',
   },
   {
     qualification: 'HSC, Class XII',
@@ -25,6 +25,7 @@ const education = [
 const Education = () => (
   <Section
     id="education"
+    index="02"
     eyebrow="Education"
     title="Academic background"
     description="Computer Science education from school through my engineering degree."

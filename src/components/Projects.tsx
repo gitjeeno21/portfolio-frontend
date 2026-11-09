@@ -21,6 +21,7 @@ const Projects = () => {
   return (
     <Section
       id="projects"
+      index="06"
       eyebrow="Projects"
       title="Selected work"
       description="Academic work across predictive modelling, retrieval-augmented generation, and data analysis."
@@ -41,9 +42,14 @@ const Projects = () => {
 
       <div className="projects-grid" aria-live="polite">
         {visibleProjects.map((project, index) => (
-          <Reveal key={project.title} className="project-card glass-card" delay={index * 60} spotlight>
+          <Reveal key={`${activeCategory}-${project.title}`} className="project-card glass-card" delay={index * 60} spotlight>
             <div className="project-copy">
-              <p className="project-category">{project.category}</p>
+              <div className="project-meta">
+                <p className="project-category">{project.category}</p>
+                <span className="project-number" aria-hidden="true">
+                  {String(projects.indexOf(project) + 1).padStart(2, '0')}
+                </span>
+              </div>
               <h3>{project.title}</h3>
               <p className="project-description">{project.description}</p>
               <ul className="project-tags" aria-label="Technologies">

@@ -1,6 +1,7 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 import About from '@/components/About';
+import Ambient from '@/components/Ambient';
 import Certifications from '@/components/Certifications';
 import Contact from '@/components/Contact';
 import Education from '@/components/Education';
@@ -13,6 +14,7 @@ import Skills from '@/components/Skills';
 const Index = () => (
   <div className="site-bg">
     <a className="skip-link" href="#main-content">Skip to content</a>
+    <Ambient />
     <Header />
     <main id="main-content" tabIndex={-1}>
       <Hero />
@@ -30,10 +32,11 @@ const Index = () => (
     </nav>
     <footer className="site-footer">
       <div className="section-container">
+        <p className="footer-wordmark" aria-hidden="true">Jeenokanth G.</p>
         <div className="site-footer-inner">
           <div>
             <span>Jeenokanth G</span>
-            <p>AI / ML Engineer</p>
+            <p>AI / ML Engineer · © {new Date().getFullYear()}</p>
           </div>
           <nav aria-label="Footer links" className="footer-links">
             <a className="footer-link" href="mailto:jeenojk01@gmail.com" aria-label="Email Jeenokanth">
@@ -47,6 +50,10 @@ const Index = () => (
             <a className="footer-link" href="https://github.com/gitjeeno21" target="_blank" rel="noreferrer">
               <Github size={16} aria-hidden="true" />
               GitHub
+            </a>
+            <a className="footer-link" href="#home" aria-label="Back to top">
+              <ArrowUp size={16} aria-hidden="true" />
+              Top
             </a>
           </nav>
         </div>

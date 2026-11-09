@@ -29,6 +29,7 @@ const internships = [
 const Experience = () => (
   <Section
     id="experience"
+    index="03"
     eyebrow="Experience"
     title="Professional experience"
     description="Hands-on experience in data analytics and full-stack development, the foundation for building and deploying AI/ML applications."

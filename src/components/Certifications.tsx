@@ -1,3 +1,5 @@
+import { BadgeCheck } from 'lucide-react';
+
 import { Section } from '@/components/Section';
 import Reveal from '@/components/Reveal';
 
@@ -13,14 +15,14 @@ const certifications = [
 const Certifications = () => (
   <Section
     id="certifications"
+    index="05"
     eyebrow="Certifications"
-    title="Continuous learning"
   >
     <div className="certification-grid">
       {certifications.map((certification, index) => (
         <Reveal key={certification.title} delay={index * 60}>
           <article className="certification-card glass-card">
-            <span className="certification-mark" aria-hidden="true">✓</span>
+            <span className="certification-mark" aria-hidden="true"><BadgeCheck size={15} /></span>
             <div>
               <h3>{certification.title}</h3>
               <p>{certification.issuer}</p>

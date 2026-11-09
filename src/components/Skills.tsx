@@ -44,7 +44,7 @@ const expertiseAreas = [
     title: 'WEB DEVELOPMENT',
     icon: PanelsTopLeft,
     description: 'Web application experience across frontend, backend, and database integration.',
-    skills: ['Django', 'MERN Stack', 'MongoDB'],
+    skills: ['MERN Stack', 'MongoDB'],
   },
 ];
 
@@ -53,6 +53,7 @@ const tools = ['Git', 'GitHub', 'Jupyter Notebook'];
 const Skills = () => (
   <Section
     id="expertise"
+    index="04"
     eyebrow="Expertise"
     title="Areas of expertise"
     description="Core areas and tools drawn from my internship and academic project experience."
